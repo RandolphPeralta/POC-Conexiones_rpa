@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entorno virtual
+env/
+venv/
+ENV/
+.venv/
+.ENV/
+
+# Archivos de entorno
+.env
+.env.*
+
+# Archivos de salida y resultados
+autorizaciones/*.json
+
+# Configuración del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de log y caché
+*.log
+*.sqlite3
+.cache/
+*.bak
+
+# Archivos de configuración de editores/IDE
+.vscode/
+.idea/
+
+# Selenium y WebDriver
+chromedriver.log
+
+# Archivos de prueba y debugging
+debug.log
+*.pid
