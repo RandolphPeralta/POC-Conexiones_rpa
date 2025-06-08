@@ -1,0 +1,68 @@
+{
+    "autorizacion": {
+        "numero": "29766636",
+        "origen": "Anexo3",
+        "solicitud": "23685933",
+        "cantidad_entregas": "2",
+        "fecha_inicio": "2025-06-07",
+        "fecha_fin": "2025-12-04",
+        "dias_vigencia": "180",
+        "posfechada": "No",
+        "fecha_autorizacion": "2025-06-07",
+        "impresiones": "0 de 4",
+        "ambito": "Ambulatorio",
+        "contrato_anticipado": "No"
+    },
+    "prestador": {
+        "tipo_documento": "NI",
+        "numero_documento": "800250192",
+        "razon_social": "PRODIAGNOSTICO CLINICA VICTORIANA",
+        "departamento": "ANTIOQUIA",
+        "sede_prestador": "PRODIAGNOSTICO CLINICA VICTORIANA",
+        "telefono1": "6043225566",
+        "telefono2": "3332817993",
+        "correo": "",
+        "municipio": "MEDELLÍN",
+        "direccion": "Carrera 49 # 58 - 19 piso 1"
+    },
+    "paciente": {
+        "nombre": "GLORIA ELENA ACEVEDO BEDOYA",
+        "documento": "43847886",
+        "contrato": "0084-2025",
+        "regimen": "SUBSIDIADO",
+        "tipo_documento": "CC",
+        "fecha_nacimiento": "1979-07-31",
+        "direccion": "CORREGIMIENTO GUAYABAL",
+        "genero": "Femenino",
+        "nivel_sisben": "1",
+        "servicio": "Cirugia General (Consulta Ext)",
+        "diagnostico_principal": "R103 - Dolor localizado en otras partes inferiores del abdomen"
+    },
+    "tecnologias": [
+        {
+            "tipo": "Procedimiento",
+            "codigo": "883440",
+            "descripcion": "RESONANCIA MAGNETICA DE PELVIS",
+            "cantidad": "1",
+            "valor": "$ 342.216,60"
+        },
+        {
+            "tipo": "Procedimiento",
+            "codigo": "883401",
+            "descripcion": "RESONANCIA MAGNETICA DE ABDOMEN",
+            "cantidad": "1",
+            "valor": "$ 342.216,60"
+        }
+    ],
+    "pagos_compartidos": {
+        "cuota_moderadora": "No",
+        "cuota_recuperacion": "No",
+        "copago": "No",
+        "tope_afiliado": "No",
+        "valor": "$ 0",
+        "porcentaje": "0.00",
+        "nombre_autorizador": "rgonzall (ROBERTO GONZALEZ LEDESMA)",
+        "cargo": "AUTORIZADOR SAVIA SALUD"
+    },
+    "observaciones": "ok"
+}

@@ -1,0 +1,61 @@
+{
+    "autorizacion": {
+        "numero": "29766906",
+        "origen": "Anexo3",
+        "solicitud": "23341604",
+        "cantidad_entregas": "1",
+        "fecha_inicio": "2025-06-07",
+        "fecha_fin": "2025-12-04",
+        "dias_vigencia": "180",
+        "posfechada": "No",
+        "fecha_autorizacion": "2025-06-07",
+        "impresiones": "0 de 4",
+        "ambito": "Ambulatorio",
+        "contrato_anticipado": "No"
+    },
+    "prestador": {
+        "tipo_documento": "NI",
+        "numero_documento": "800250192",
+        "razon_social": "PRODIAGNOSTICO RIONEGRO",
+        "departamento": "ANTIOQUIA",
+        "sede_prestador": "PRODIAGNOSTICO RIONEGRO",
+        "telefono1": "6043225566",
+        "telefono2": "6045605168",
+        "correo": "",
+        "municipio": "RIONEGRO",
+        "direccion": "Carrera 51 # 51 - 42 Local 105"
+    },
+    "paciente": {
+        "nombre": "SOCORRO BETANCOURT DE MONSALVE",
+        "documento": "21783945",
+        "contrato": "0084-2025",
+        "regimen": "SUBSIDIADO",
+        "tipo_documento": "CC",
+        "fecha_nacimiento": "1952-11-13",
+        "direccion": "CRA 52 52 477",
+        "genero": "Femenino",
+        "nivel_sisben": "2",
+        "servicio": "Medicina General (Consulta Ext)",
+        "diagnostico_principal": "E109 - Diabetes mellitus insulinodependiente sin mencion de complicacion"
+    },
+    "tecnologias": [
+        {
+            "tipo": "Procedimiento",
+            "codigo": "886012",
+            "descripcion": "OSTEODENSITOMETRIA POR ABSORCION DUAL",
+            "cantidad": "1",
+            "valor": "$ 69.458,00"
+        }
+    ],
+    "pagos_compartidos": {
+        "cuota_moderadora": "No",
+        "cuota_recuperacion": "No",
+        "copago": "No",
+        "tope_afiliado": "No",
+        "valor": "$ 0",
+        "porcentaje": "0.00",
+        "nombre_autorizador": "gospinab (GLORIA NANCY OSPINA BERNAL)",
+        "cargo": "AUTORIZADOR SAVIA SALUD"
+    },
+    "observaciones": "SE GENERA AUTORIZACION"
+}
