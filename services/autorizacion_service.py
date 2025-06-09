@@ -123,6 +123,37 @@ def consultar_autorizacion(driver, wait, numero_autorizacion):
             print(f"⚠️ No se pudieron extraer tecnologías: {e}")
 
         guardar_autorizacion_json(numero_autorizacion, datos)
+        
+        #7. Cerrar el diálogo de visualización (versión robusta)
+        try:
+            # Esperar un momento para asegurar que todo está cargado
+            time.sleep(2)
 
+            # Intentar primero con el botón de cierre (X)
+            try:
+                boton_cerrar = wait.until(EC.element_to_be_clickable(
+                    (By.CSS_SELECTOR, "a.ui-dialog-titlebar-close")
+                ))
+                boton_cerrar.click()
+                print("✅ Diálogo cerrado con el botón X")
+            except:
+                # Si falla, intentar con el botón "Salir"
+                boton_salir = wait.until(EC.element_to_be_clickable(
+                    (By.XPATH, "//button[contains(@onclick, 'PF') and contains(text(), 'Salir')]")
+                ))
+                boton_salir.click()
+                print("✅ Diálogo cerrado con el botón Salir")
+
+        except Exception as e:
+            print(f"⚠️ No se pudo cerrar el diálogo. Error: {str(e)}")
+            # Intentar forzar el cierre mediante JavaScript si los métodos anteriores fallan
+            try:
+                driver.execute_script("PF('dialogoVer').hide();")
+                print("✅ Diálogo cerrado mediante JavaScript")
+            except Exception as js_e:
+                print(f"⚠️ Fallo al cerrar con JavaScript: {str(js_e)}")
+             
+        
+        
     except Exception as e:
         print("❌ Error al extraer datos del diálogo:", e)

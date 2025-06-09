@@ -1,0 +1,23 @@
+{
+    "informacion_autorizacion": {
+        "autorizacion": "29766521",
+        "origen": "Anexo3",
+        "anexo_3": "23590452",
+        "cantidad_entregas": "1",
+        "fecha_inicio": "2025-06-07",
+        "fecha_fin": "2025-12-04",
+        "dias_vigencia": "180",
+        "posfechada": "No",
+        "fecha_autorizacion": "2025-06-07",
+        "impresiones": "0 de 4"
+    },
+    "tecnologias": [
+        {
+            "tipo": "Procedimiento",
+            "codigo": "882317",
+            "descripcion": "ECOGRAFIA DOPPLER DE VASOS VENOSOS DE MIEMBROS INFERIORES",
+            "cantidad": "1",
+            "tipo_entrega": "Sin Entrega"
+        }
+    ]
+}

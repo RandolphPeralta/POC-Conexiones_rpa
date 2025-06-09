@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from services.login_service import iniciar_sesion
 from services.autorizacion_service import consultar_autorizacion
+from services.control_entregas_service import gestionar_control_entregas
 import time
 
 numeros_autorizacion = [
@@ -19,7 +20,9 @@ if __name__ == "__main__":
 
         try:
             iniciar_sesion(driver, wait)
+            
             consultar_autorizacion(driver, wait, numero)
+            gestionar_control_entregas(driver, wait, numero)
         finally:
             driver.quit()
             time.sleep(2)
