@@ -20,7 +20,6 @@ if __name__ == "__main__":
 
         try:
             iniciar_sesion(driver, wait)
-            
             consultar_autorizacion(driver, wait, numero)
             gestionar_control_entregas(driver, wait, numero)
         finally:

@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import json
+from utils.file_utils import guardar_control_entregas_json
 
 def gestionar_control_entregas(driver, wait, numero_autorizacion):
     """
@@ -55,7 +56,8 @@ def gestionar_control_entregas(driver, wait, numero_autorizacion):
         resultados = {
             'success': False,
             'data': None,
-            'error': None
+            'error': None,
+            'filepath': None
         }
 
         # 1. Hacer clic en "Control y Registro de Entregas"
@@ -113,16 +115,12 @@ def gestionar_control_entregas(driver, wait, numero_autorizacion):
             except Exception as e:
                 print(f"⚠️ No se pudieron extraer las tecnologías: {e}")
 
-            # Guardar en JSON
-            nombre_archivo = f"control_entregas_{numero_autorizacion}.json"
-            with open(nombre_archivo, 'w', encoding='utf-8') as f:
-                json.dump(datos_control, f, ensure_ascii=False, indent=4)
-            
-            print(f"✅ Datos de control de entregas guardados en '{nombre_archivo}'")
+            # Guardar en JSON usando la función modularizada
+            ruta_archivo = guardar_control_entregas_json(numero_autorizacion, datos_control)
             
             resultados['success'] = True
             resultados['data'] = datos_control
-            resultados['filename'] = nombre_archivo
+            resultados['filepath'] = ruta_archivo
 
         except Exception as e:
             error_msg = f"Error al extraer datos del diálogo de control: {str(e)}"
