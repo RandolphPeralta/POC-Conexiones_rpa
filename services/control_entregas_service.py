@@ -127,29 +127,49 @@ def gestionar_control_entregas(driver, wait, numero_autorizacion):
             print(f"❌ {error_msg}")
             resultados['error'] = error_msg
 
-        # 3. Cerrar el diálogo de Control y Registro de Entregas
+        # 3. Cerrar el diálogo de Control y Registro de Entregas (versión mejorada)
         try:
-            time.sleep(1)
+            # Esperar a que el diálogo esté completamente cargado
+            wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.ui-dialog[aria-labelledby='j_idt281_title']")))
+            
+            # Opción 1: Intentar cerrar con el botón X (versión más específica)
             try:
                 boton_cerrar = wait.until(EC.element_to_be_clickable(
-                    (By.CSS_SELECTOR, "a.ui-dialog-titlebar-close")
+                    (By.CSS_SELECTOR, "div.ui-dialog[aria-labelledby='j_idt281_title'] a.ui-dialog-titlebar-close")
                 ))
                 boton_cerrar.click()
-                print("✅ Diálogo de control cerrado con el botón X")
-            except:
-                boton_salir = wait.until(EC.element_to_be_clickable(
-                    (By.XPATH, "//button[contains(@onclick, 'PF') and contains(text(), 'Salir')]")
-                ))
-                boton_salir.click()
-                print("✅ Diálogo de control cerrado con el botón Salir")
-
+                print("✅ Diálogo de control cerrado con el botón X (selector específico)")
+            except Exception as e:
+                print(f"⚠️ No se pudo cerrar con botón X (intentando alternativa): {str(e)}")
+                
+                # Opción 2: Intentar con el botón Salir si existe
+                try:
+                    boton_salir = wait.until(EC.element_to_be_clickable(
+                        (By.XPATH, "//div[@id='j_idt281']//button[contains(text(), 'Salir')]")
+                    ))
+                    boton_salir.click()
+                    print("✅ Diálogo de control cerrado con el botón Salir")
+                except Exception as e:
+                    print(f"⚠️ No se pudo cerrar con botón Salir (intentando JavaScript): {str(e)}")
+                    
+                    # Opción 3: Forzar cierre con JavaScript
+                    try:
+                        driver.execute_script("""
+                            var dialogs = document.querySelectorAll('div.ui-dialog');
+                            dialogs.forEach(function(dialog) {
+                                var title = dialog.querySelector('.ui-dialog-title');
+                                if(title && title.textContent.includes('Control y registro de entregas')) {
+                                    var closeBtn = dialog.querySelector('a.ui-dialog-titlebar-close');
+                                    if(closeBtn) closeBtn.click();
+                                }
+                            });
+                        """)
+                        print("✅ Diálogo de control cerrado mediante JavaScript")
+                    except Exception as js_e:
+                        print(f"⚠️ Fallo al cerrar con JavaScript: {str(js_e)}")
+                        
         except Exception as e:
-            print(f"⚠️ No se pudo cerrar el diálogo de control: {str(e)}")
-            try:
-                driver.execute_script("PF('dialogoGestionar').hide();")
-                print("✅ Diálogo de control cerrado mediante JavaScript")
-            except Exception as js_e:
-                print(f"⚠️ Fallo al cerrar con JavaScript: {str(js_e)}")
+            print(f"❌ Error grave al intentar cerrar el diálogo: {str(e)}")
 
         return resultados
 
