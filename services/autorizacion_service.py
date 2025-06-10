@@ -14,7 +14,18 @@ logging.basicConfig(level=logging.WARNING)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
-def consultar_autorizacion(driver, wait, numero_autorizacion):
+def check_authorization(driver, wait, numero_autorizacion):
+    """
+    Gestiona las autorizaciones
+    
+    Args:
+        driver: Instancia del navegador
+        wait: Instancia de WebDriverWait
+        numero_autorizacion: Número de autorización a consultar
+        
+    Returns:
+        datos: Diccionario con los datos de la autorizacion
+    """
     try:
         wait.until(EC.element_to_be_clickable(
             (By.XPATH, "//h3[a[text()='Autorizaciones']]"))).click().click()

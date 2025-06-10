@@ -5,7 +5,7 @@ import time
 import json
 from utils.file_utils import guardar_control_entregas_json
 
-def gestionar_control_entregas(driver, wait, numero_autorizacion):
+def manage_delivery_control(driver, wait, numero_autorizacion):
     """
     Gestiona el proceso de control y registro de entregas para una autorización
     

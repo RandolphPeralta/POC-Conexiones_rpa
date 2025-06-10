@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from dotenv import load_dotenv
 import os
 
-def iniciar_sesion(driver, wait):
+def login(driver, wait):
     load_dotenv()
     usuario = os.getenv("USUARIO_SAVIA")
     contrasena = os.getenv("CONTRASENA_SAVIA")

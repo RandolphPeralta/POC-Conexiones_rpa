@@ -1,0 +1,25 @@
+{
+    "autorizacion": {
+        "numero": "29809115",
+        "origen": "Anexo3",
+        "solicitud": "23389270"
+    },
+    "prestador": {
+        "tipo_documento": "NI",
+        "numero_documento": "800250192",
+        "razon_social": "PRODIAGNOSTICO SAN DIEGO"
+    },
+    "paciente": {
+        "nombre": "KATERINE USME CIFUENTES",
+        "documento": "1038262640",
+        "contrato": "0084-2025",
+        "regimen": "SUBSIDIADO",
+        "tipo_documento": "CC",
+        "fecha_nacimiento": "2005-08-10",
+        "direccion": "Calle 41 SUR # 29 - 22",
+        "genero": "Femenino",
+        "nivel_sisben": "N",
+        "servicio": "Reumatologia (Consulta Ext)",
+        "diagnostico_principal": "R104 - Otros dolores abdominales y los no especificados"
+    }
+}

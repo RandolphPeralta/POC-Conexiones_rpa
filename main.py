@@ -1,8 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-from services.login_service import iniciar_sesion
-from services.autorizacion_service import consultar_autorizacion
-from services.control_entregas_service import gestionar_control_entregas
+from services.login_service import login
+from services.autorizacion_service import check_authorization
+from services.control_entregas_service import manage_delivery_control
 import time
 from datetime import datetime, timedelta
 from selenium.webdriver.support.ui import WebDriverWait
@@ -22,10 +22,14 @@ logging.getLogger('urllib3').setLevel(logging.WARNING)
 numeros_autorizacion = [
     "29766906",
     "29766636",
-    "29766521"
+    "29766521",
+    "29809259",
+    "29809115",
+    "29808833",
+    "29808738"
 ]
 
-def procesar_autorizacion(driver, wait, numero, tiempo_limite_minutos=2):
+def process_authorization(driver, wait, numero, tiempo_limite_minutos=2):
     inicio = datetime.now()
     tiempo_limite = timedelta(minutes=tiempo_limite_minutos)
     
@@ -37,7 +41,7 @@ def procesar_autorizacion(driver, wait, numero, tiempo_limite_minutos=2):
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
         # Consultar autorización
-        if not consultar_autorizacion(driver, wait, numero):
+        if not check_authorization(driver, wait, numero):
             print(f"❌ Falló consulta para {numero}")
             return False
             
@@ -50,7 +54,7 @@ def procesar_autorizacion(driver, wait, numero, tiempo_limite_minutos=2):
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
         # Gestionar control de entregas
-        if not gestionar_control_entregas(driver, wait, numero):
+        if not manage_delivery_control(driver, wait, numero):
             print(f"❌ Falló control de entregas para {numero}")
             return False
             
@@ -79,10 +83,10 @@ if __name__ == "__main__":
         # Iniciar sesión una sola vez al principio
         #driver = webdriver.Chrome()
         wait = WebDriverWait(driver, 15)
-        iniciar_sesion(driver, wait)
+        login(driver, wait)
         
         for numero in numeros_autorizacion:
-            exito = procesar_autorizacion(driver, wait, numero)
+            exito = process_authorization(driver, wait, numero)
             
             if not exito:
                 # Si falló o se excedió el tiempo, reiniciar el navegador
@@ -92,7 +96,7 @@ if __name__ == "__main__":
                 
                 driver = webdriver.Chrome()
                 wait = WebDriverWait(driver, 15)
-                iniciar_sesion(driver, wait)
+                login(driver, wait)
                 
     finally:
         if driver:

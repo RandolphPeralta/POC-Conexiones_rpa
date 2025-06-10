@@ -1,0 +1,25 @@
+{
+    "autorizacion": {
+        "numero": "29809259",
+        "origen": "Anexo3",
+        "solicitud": "23674347"
+    },
+    "prestador": {
+        "tipo_documento": "NI",
+        "numero_documento": "800250192",
+        "razon_social": "PRODIAGNOSTICO SAN DIEGO"
+    },
+    "paciente": {
+        "nombre": "ANA JOAQUINA GUTIERREZ GIRALDO",
+        "documento": "1035392539",
+        "contrato": "0084-2025",
+        "regimen": "SUBSIDIADO",
+        "tipo_documento": "CC",
+        "fecha_nacimiento": "1959-09-30",
+        "direccion": "BARRIO EL UNO",
+        "genero": "Femenino",
+        "nivel_sisben": "2",
+        "servicio": "Medicina Interna (Consulta Ext)",
+        "diagnostico_principal": "E780 - Hipercolesterolemia pura"
+    }
+}
