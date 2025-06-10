@@ -90,13 +90,13 @@ def gestionar_control_entregas(driver, wait, numero_autorizacion):
                 "autorizacion": driver.find_element(By.ID, "frmGestionar:j_idt286").text,
                 "origen": driver.find_element(By.ID, "frmGestionar:j_idt288").text,
                 "anexo_3": driver.find_element(By.ID, "frmGestionar:j_idt292").text,
-                "cantidad_entregas": driver.find_element(By.ID, "frmGestionar:j_idt294").text,
-                "fecha_inicio": driver.find_element(By.ID, "frmGestionar:j_idt296").text,
-                "fecha_fin": driver.find_element(By.ID, "frmGestionar:j_idt298").text,
-                "dias_vigencia": driver.find_element(By.ID, "frmGestionar:j_idt300").text,
-                "posfechada": driver.find_element(By.ID, "frmGestionar:j_idt302").text,
-                "fecha_autorizacion": driver.find_element(By.ID, "frmGestionar:j_idt304").text,
-                "impresiones": driver.find_element(By.ID, "frmGestionar:j_idt306").text
+                #"cantidad_entregas": driver.find_element(By.ID, "frmGestionar:j_idt294").text,
+                #"fecha_inicio": driver.find_element(By.ID, "frmGestionar:j_idt296").text,
+                #"fecha_fin": driver.find_element(By.ID, "frmGestionar:j_idt298").text,
+                #"dias_vigencia": driver.find_element(By.ID, "frmGestionar:j_idt300").text,
+                #"posfechada": driver.find_element(By.ID, "frmGestionar:j_idt302").text,
+                #"fecha_autorizacion": driver.find_element(By.ID, "frmGestionar:j_idt304").text,
+                #"impresiones": driver.find_element(By.ID, "frmGestionar:j_idt306").text
             }
             
             # Extraer tecnologías con estado de entrega
@@ -107,10 +107,10 @@ def gestionar_control_entregas(driver, wait, numero_autorizacion):
                 for fila in filas_tecnologias:
                     celdas = fila.find_elements(By.TAG_NAME, "td")
                     tecnologia = {
-                        "tipo": celdas[0].text,
-                        "codigo": celdas[1].text,
-                        "descripcion": celdas[2].text,
-                        "cantidad": celdas[3].text,
+                        #"tipo": celdas[0].text,
+                        #"codigo": celdas[1].text,
+                        #"descripcion": celdas[2].text,
+                        #"cantidad": celdas[3].text,
                         "tipo_entrega": celdas[4].text
                     }
                     datos_control["tecnologias"].append(tecnologia)

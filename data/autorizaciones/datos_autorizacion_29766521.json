@@ -2,28 +2,12 @@
     "autorizacion": {
         "numero": "29766521",
         "origen": "Anexo3",
-        "solicitud": "23590452",
-        "cantidad_entregas": "1",
-        "fecha_inicio": "2025-06-07",
-        "fecha_fin": "2025-12-04",
-        "dias_vigencia": "180",
-        "posfechada": "No",
-        "fecha_autorizacion": "2025-06-07",
-        "impresiones": "0 de 4",
-        "ambito": "Ambulatorio",
-        "contrato_anticipado": "No"
+        "solicitud": "23590452"
     },
     "prestador": {
         "tipo_documento": "NI",
         "numero_documento": "800250192",
-        "razon_social": "PRO DIAGNOSTICO LAS VEGAS",
-        "departamento": "ANTIOQUIA",
-        "sede_prestador": "PRO DIAGNOSTICO LAS VEGAS",
-        "telefono1": "6045605168",
-        "telefono2": "6043225566",
-        "correo": "citas@prodiagnostico.com",
-        "municipio": "MEDELLÍN",
-        "direccion": "Carrera 48 # 7 - 142"
+        "razon_social": "PRO DIAGNOSTICO LAS VEGAS"
     },
     "paciente": {
         "nombre": "NIDIA THAYU FORNERINO CONTRERAS",
@@ -37,25 +21,5 @@
         "nivel_sisben": "O",
         "servicio": "Medicina General (Consulta Ext)",
         "diagnostico_principal": "I872 - Insuficiencia venosa (cronica) (periferica)"
-    },
-    "tecnologias": [
-        {
-            "tipo": "Procedimiento",
-            "codigo": "882317",
-            "descripcion": "ECOGRAFIA DOPPLER DE VASOS VENOSOS DE MIEMBROS INFERIORES",
-            "cantidad": "1",
-            "valor": "$ 126.068,42"
-        }
-    ],
-    "pagos_compartidos": {
-        "cuota_moderadora": "No",
-        "cuota_recuperacion": "No",
-        "copago": "No",
-        "tope_afiliado": "No",
-        "valor": "$ 0",
-        "porcentaje": "0.00",
-        "nombre_autorizador": "yzabales (YONADIS ELENA ZABALETA SIMANCA)",
-        "cargo": "AUTORIZADOR SAVIA SALUD"
-    },
-    "observaciones": "Paciente femenina de 48 aos d eedad residente de robleod aures comerciante migrante Con natecednete desocnocidos noa lergicos no qcos no tabquismo refiere paciente cuadro clinico de larga data de recocrido venosos tortuosos con coloraicon ocre en maleolos iternos ha tenido edemas con limitacion funcional estar en bipedestacon y marcha refiere sensaicond e dolor en gastronemios angustiada consulta paciente con majibra d ehommas y pratt negatiuvas peor hay dolor en reocrridos venosos envio eocgrafia de doppler d evasos venosos ajusto formula medica para modualciond e dolor solicitoi autorizacin de servicios Ecografia doppler de vasos venosos de miembros inferiores"
+    }
 }

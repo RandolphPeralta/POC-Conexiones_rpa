@@ -64,27 +64,27 @@ def consultar_autorizacion(driver, wait, numero_autorizacion):
                 "numero": obtener("frmVer:j_idt130"),
                 "origen": obtener("frmVer:j_idt132"),
                 "solicitud": obtener("frmVer:j_idt137"),
-                "cantidad_entregas": obtener("frmVer:j_idt139"),
-                "fecha_inicio": obtener("frmVer:j_idt141"),
-                "fecha_fin": obtener("frmVer:j_idt143"),
-                "dias_vigencia": obtener("frmVer:j_idt145"),
-                "posfechada": obtener("frmVer:j_idt147"),
-                "fecha_autorizacion": obtener("frmVer:j_idt149"),
-                "impresiones": obtener("frmVer:j_idt151"),
-                "ambito": obtener("frmVer:j_idt153"),
-                "contrato_anticipado": obtener("frmVer:j_idt155")
+                #"cantidad_entregas": obtener("frmVer:j_idt139"),
+                #"fecha_inicio": obtener("frmVer:j_idt141"),
+                #"fecha_fin": obtener("frmVer:j_idt143"),
+                #"dias_vigencia": obtener("frmVer:j_idt145"),
+                #"posfechada": obtener("frmVer:j_idt147"),
+                #"fecha_autorizacion": obtener("frmVer:j_idt149"),
+                #"impresiones": obtener("frmVer:j_idt151"),
+                #"ambito": obtener("frmVer:j_idt153"),
+                #"contrato_anticipado": obtener("frmVer:j_idt155")
             },
             "prestador": {
                 "tipo_documento": obtener("frmVer:j_idt161"),
                 "numero_documento": obtener("frmVer:j_idt163"),
                 "razon_social": obtener("frmVer:razonSocialAuditar"),
-                "departamento": obtener("frmVer:departamentoIpsAuditar"),
-                "sede_prestador": obtener("frmVer:j_idt167"),
-                "telefono1": obtener("frmVer:j_idt169"),
-                "telefono2": obtener("frmVer:j_idt173"),
-                "correo": obtener("frmVer:j_idt171"),
-                "municipio": obtener("frmVer:j_idt175"),
-                "direccion": obtener("frmVer:j_idt177")
+                #"departamento": obtener("frmVer:departamentoIpsAuditar"),
+                #"sede_prestador": obtener("frmVer:j_idt167"),
+                #"telefono1": obtener("frmVer:j_idt169"),
+                #"telefono2": obtener("frmVer:j_idt173"),
+                #"correo": obtener("frmVer:j_idt171"),
+                #"municipio": obtener("frmVer:j_idt175"),
+                #"direccion": obtener("frmVer:j_idt177")
             },
             "paciente": {
                 "nombre": obtener("frmVer:j_idt181"),
@@ -99,38 +99,38 @@ def consultar_autorizacion(driver, wait, numero_autorizacion):
                 "servicio": obtener("frmVer:j_idt201"),
                 "diagnostico_principal": obtener("frmVer:j_idt203")
             },
-            "tecnologias": [],
-            "pagos_compartidos": {
-                "cuota_moderadora": obtener("frmVer:j_idt232"),
-                "cuota_recuperacion": obtener("frmVer:j_idt234"),
-                "copago": obtener("frmVer:j_idt236"),
-                "tope_afiliado": obtener("frmVer:j_idt238"),
-                "valor": obtener("frmVer:j_idt240"),
-                "porcentaje": obtener("frmVer:j_idt242"),
-                "nombre_autorizador": obtener("frmVer:j_idt244"),
-                "cargo": obtener("frmVer:j_idt246")
-            },
-            "observaciones": ""
+            #"tecnologias": [],
+            #"pagos_compartidos": {
+            #    "cuota_moderadora": obtener("frmVer:j_idt232"),
+            #    "cuota_recuperacion": obtener("frmVer:j_idt234"),
+            #    "copago": obtener("frmVer:j_idt236"),
+            #    "tope_afiliado": obtener("frmVer:j_idt238"),
+            #    "valor": obtener("frmVer:j_idt240"),
+            #    "porcentaje": obtener("frmVer:j_idt242"),
+            #    "nombre_autorizador": obtener("frmVer:j_idt244"),
+            #    "cargo": obtener("frmVer:j_idt246")
+            #},
+            #"observaciones": ""
         }
 
-        try:
-            datos["observaciones"] = driver.find_element(By.ID, "frmVer:j_idt257").text.strip()
-        except:
-            datos["observaciones"] = ""
+        #try:
+        #    datos["observaciones"] = driver.find_element(By.ID, "frmVer:j_idt257").text.strip()
+        #except:
+        #    datos["observaciones"] = ""
 
-        try:
-            filas = driver.find_elements(By.XPATH, "//tbody[@id='frmVer:tablaTecnologiasVer_data']/tr")
-            for fila in filas:
-                celdas = fila.find_elements(By.TAG_NAME, "td")
-                datos["tecnologias"].append({
-                    "tipo": celdas[0].text,
-                    "codigo": celdas[1].text,
-                    "descripcion": celdas[2].text,
-                    "cantidad": celdas[3].text,
-                    "valor": celdas[4].text
-                })
-        except Exception as e:
-            print(f"⚠️ No se pudieron extraer tecnologías: {e}")
+        #try:
+        #    filas = driver.find_elements(By.XPATH, "//tbody[@id='frmVer:tablaTecnologiasVer_data']/tr")
+        #    for fila in filas:
+        #        celdas = fila.find_elements(By.TAG_NAME, "td")
+        #        datos["tecnologias"].append({
+        #            "tipo": celdas[0].text,
+        #            "codigo": celdas[1].text,
+        #            "descripcion": celdas[2].text,
+        #            "cantidad": celdas[3].text,
+        #            "valor": celdas[4].text
+        #        })
+        #except Exception as e:
+        #    print(f"⚠️ No se pudieron extraer tecnologías: {e}")
 
         guardar_autorizacion_json(numero_autorizacion, datos)
         
