@@ -13,10 +13,11 @@ LOGGER.setLevel(logging.WARNING)
 logging.basicConfig(level=logging.WARNING)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 
+
 def consultar_autorizacion(driver, wait, numero_autorizacion):
     try:
         wait.until(EC.element_to_be_clickable(
-            (By.XPATH, "//h3[a[text()='Autorizaciones']]"))).click()
+            (By.XPATH, "//h3[a[text()='Autorizaciones']]"))).click().click()
         time.sleep(1)
     except:
         pass

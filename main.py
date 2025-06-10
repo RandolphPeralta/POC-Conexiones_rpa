@@ -5,6 +5,19 @@ from services.autorizacion_service import consultar_autorizacion
 from services.control_entregas_service import gestionar_control_entregas
 import time
 from datetime import datetime, timedelta
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
+
+# Agregar al inicio del script para suprimir logs no deseados
+from selenium.webdriver.remote.remote_connection import LOGGER
+import logging
+
+# Configurar nivel de logging
+LOGGER.setLevel(logging.WARNING)
+logging.basicConfig(level=logging.WARNING)
+logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 numeros_autorizacion = [
     "29766906",
@@ -19,23 +32,33 @@ def procesar_autorizacion(driver, wait, numero, tiempo_limite_minutos=2):
     print(f"\n🔁 Consultando autorización: {numero}\n")
     
     try:
-        # Consultar autorización con manejo de tiempo
-        consultar_autorizacion(driver, wait, numero)
+        # Volver a la página inicial para asegurar estado consistente
+        driver.get("https://conexiones.saviasaludeps.com/savia/home.faces")
+        wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
-        # Verificar si se ha excedido el tiempo límite
-        if datetime.now() - inicio > tiempo_limite:
-            print(f"⏰ Tiempo límite excedido para la autorización {numero}")
+        # Consultar autorización
+        if not consultar_autorizacion(driver, wait, numero):
+            print(f"❌ Falló consulta para {numero}")
             return False
-        
-        # Gestionar control de entregas con manejo de tiempo
-        gestionar_control_entregas(driver, wait, numero)
-        
-        # Verificar tiempo nuevamente
+            
         if datetime.now() - inicio > tiempo_limite:
-            print(f"⏰ Tiempo límite excedido para la autorización {numero}")
+            print(f"⏰ Tiempo límite excedido para {numero}")
             return False
+            
+        # Volver a cargar página antes de control de entregas
+        driver.get("https://conexiones.saviasaludeps.com/savia/home.faces")
+        wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
+        # Gestionar control de entregas
+        if not gestionar_control_entregas(driver, wait, numero):
+            print(f"❌ Falló control de entregas para {numero}")
+            return False
+            
         return True
+        
+    except Exception as e:
+        print(f"❌ Error crítico al procesar {numero}: {str(e)}")
+        return False
     
     except Exception as e:
         print(f"❌ Error al procesar autorización {numero}: {str(e)}")
