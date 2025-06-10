@@ -45,6 +45,23 @@ def consultar_autorizacion(driver, wait, numero_autorizacion):
     except Exception as e:
         print("❌ No se pudo hacer clic en Refrescar:", e)
         return
+    
+    # 🔍 4.5 Verificar si el estado de la fila es 'Autorizada'
+    try:
+        wait.until(EC.presence_of_element_located((By.ID, "frmAutorizaciones:tablaRegistros_data")))
+        estado_xpath = "//tbody[@id='frmAutorizaciones:tablaRegistros_data']/tr[1]/td[6]"
+        estado_element = driver.find_element(By.XPATH, estado_xpath)
+        estado_texto = estado_element.text.strip()
+        print(f"🔍 Estado encontrado en la primera fila: {estado_texto}")
+
+        if estado_texto != "Autorizada":
+            print("⚠️ El estado no es 'Autorizada'. Se detiene el proceso.")
+            return
+        else:
+            print("✅ El estado es 'Autorizada'. Se procederá con el clic en 'Ver'.")
+    except Exception as e:
+        print("❌ Error al verificar el estado de la tabla:", e)
+        return
 
     try:
         time.sleep(2)
