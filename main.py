@@ -50,7 +50,7 @@ def process_authorization(driver, wait, numero, tiempo_limite_minutos=2):
             return False
             
         # Volver a cargar página antes de control de entregas
-        driver.get("https://conexiones.saviasaludeps.com/savia/home.faces")
+        #driver.get("https://conexiones.saviasaludeps.com/savia/home.faces")
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
         # Gestionar control de entregas

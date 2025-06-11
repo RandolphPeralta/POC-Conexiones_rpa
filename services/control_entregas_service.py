@@ -17,21 +17,37 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
     Returns:
         dict: Diccionario con los datos del control de entregas
     """
-    try:
-    # Solo colapsar si está colapsado
-        panel = wait.until(EC.element_to_be_clickable((By.XPATH, "//h3[a[text()='Autorizaciones']]")))
-        if "collapsed" in panel.get_attribute("class"):  # o cualquier validación del estado
-            panel.click()
-            time.sleep(1)
-    except Exception as e:
-        print("⚠️ No se pudo verificar o expandir 'Autorizaciones':", e)
 
     try:
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Autorizaciones']/parent::a"))).click()
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, "//h3[a[text()='Autorizaciones']]"))).click().click()
+        time.sleep(1)
+    except:
+        pass
+
+    try:
+        wait.until(EC.element_to_be_clickable(
+            (By.XPATH, "//span[text()='Autorizaciones']/parent::a"))).click()
         print("✅ Entraste al módulo de 'Autorizaciones'")
     except Exception as e:
         print("❌ No se pudo acceder al enlace de 'Autorizaciones':", e)
         return
+
+    #try:
+    # Solo colapsar si está colapsado
+    #    panel = wait.until(EC.element_to_be_clickable((By.XPATH, "//h3[a[text()='Autorizaciones']]")))
+    #    if "collapsed" in panel.get_attribute("class"):  # o cualquier validación del estado
+    #        panel.click()
+    #        time.sleep(1)
+    #except Exception as e:
+    #    print("⚠️ No se pudo verificar o expandir 'Autorizaciones':", e)
+
+    #try:
+    #    wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Autorizaciones']/parent::a"))).click()
+    #    print("✅ Entraste al módulo de 'Autorizaciones'")
+    #except Exception as e:
+    #    print("❌ No se pudo acceder al enlace de 'Autorizaciones':", e)
+    #    return
 
 
     try:
