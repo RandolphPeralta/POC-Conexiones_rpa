@@ -23,8 +23,8 @@ numeros_autorizacion = [
     "29766906",
     "29766636",
     "29766521",
-    #"29820829", #ANULADA, 
-    #"29799161", #ANULADA,
+    "29820829", #ANULADA, 
+    "29799161", #ANULADA,
     "29809259",
     "29809115",
     "29808833",
@@ -44,10 +44,22 @@ def process_authorization(driver, wait, numero, tiempo_limite_minutos=2):
         #driver.get("https://conexiones.saviasaludeps.com/savia/home.faces")
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
-        # Consultar autorización
-        if not check_authorization(driver, wait, numero):
+        # Nuevo: obtener estado junto con éxito
+        exito = check_authorization(driver, wait, numero)
+
+        if not exito:
             print(f"❌ Falló consulta para {numero}")
             return False
+
+        #if estado.lower() != "autorizada":
+        #    print(f"⛔ Estado no autorizado ({estado}) para {numero}. Saltando...")
+        #    return True  # No es error crítico, simplemente lo salta        
+        
+        
+        # Consultar autorización
+        #if not check_authorization(driver, wait, numero):
+        #    print(f"❌ Falló consulta para {numero}")
+        #    return False
             
         if datetime.now() - inicio > tiempo_limite:
             print(f"⏰ Tiempo límite excedido para {numero}")
@@ -102,6 +114,7 @@ if __name__ == "__main__":
                 driver = webdriver.Chrome()
                 wait = WebDriverWait(driver, 15)
                 login(driver, wait)
+
                 
     finally:
         if driver:

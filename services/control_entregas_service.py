@@ -66,6 +66,40 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
         print("❌ No se pudo hacer clic en Refrescar:", e)
         return
     
+    time.sleep(0.5)
+
+    try:
+        # Esperar a que al menos una fila con la columna "Estado" esté visible
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, '//td[span[@class="ui-column-title" and text()="Estado"]]'))
+        )
+ 
+        # Obtener la primera celda con columna "Estado"
+        cell = driver.find_element(By.XPATH, '(//td[span[@class="ui-column-title" and text()="Estado"]])[1]')
+        full_text = cell.text.strip()
+ 
+        # Remover el encabezado si viene incluido
+        if full_text.startswith("Estado"):
+            text=full_text.replace("Estado", "").strip()
+        else:
+            text=full_text
+        print(f"Estado {text}")
+
+        estado = text
+        if estado != "Autorizada":
+                print("⚠️ El estado no es 'Autorizada'. Se detiene el proceso.")
+                return None, estado
+                #return
+        else:
+            print("✅ El estado es 'Autorizada'. Se procederá con el clic en 'Ver'.")
+            pass
+            #except Exception as e:
+            #    print("❌ Error al verificar el estado de la tabla:", e)
+            #return
+    except Exception as e:
+        print(f"❌ No se pudo obtener el estado de la primera fila: {e}")
+        return False
+    
     try:
         # Esperar a que se cierre completamente el diálogo anterior
         time.sleep(2)

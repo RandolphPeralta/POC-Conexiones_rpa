@@ -77,9 +77,10 @@ def check_authorization(driver, wait, numero_autorizacion):
             text=full_text
         print(f"Estado {text}")
 
-        if text != "Autorizada":
+        estado = text
+        if estado != "Autorizada":
                 print("⚠️ El estado no es 'Autorizada'. Se detiene el proceso.")
-                return False
+                return None, estado
                 #return
         else:
             print("✅ El estado es 'Autorizada'. Se procederá con el clic en 'Ver'.")
