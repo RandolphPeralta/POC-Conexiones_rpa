@@ -23,10 +23,13 @@ numeros_autorizacion = [
     "29766906",
     "29766636",
     "29766521",
+    #"29820829", #ANULADA, 
+    #"29799161", #ANULADA,
     "29809259",
     "29809115",
     "29808833",
     "29808738"
+
 ]
 
 def process_authorization(driver, wait, numero, tiempo_limite_minutos=2):
@@ -37,7 +40,8 @@ def process_authorization(driver, wait, numero, tiempo_limite_minutos=2):
     
     try:
         # Volver a la página inicial para asegurar estado consistente
-        driver.get("https://conexiones.saviasaludeps.com/savia/home.faces")
+        time.sleep(0.5)
+        #driver.get("https://conexiones.saviasaludeps.com/savia/home.faces")
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
         # Consultar autorización
@@ -51,6 +55,7 @@ def process_authorization(driver, wait, numero, tiempo_limite_minutos=2):
             
         # Volver a cargar página antes de control de entregas
         #driver.get("https://conexiones.saviasaludeps.com/savia/home.faces")
+        time.sleep(0.5)
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
         # Gestionar control de entregas

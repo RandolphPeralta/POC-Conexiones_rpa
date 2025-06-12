@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 import time
 import json
 from utils.file_utils import guardar_autorizacion_json
@@ -12,34 +13,6 @@ import logging
 LOGGER.setLevel(logging.WARNING)
 logging.basicConfig(level=logging.WARNING)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
-
-
-def verificar_estado_autorizacion(driver, wait):
-    """
-    Verifica si el estado de la primera fila es 'Autorizada'.
-
-    Returns:
-        True si el estado es 'Autorizada',
-        False si el estado no es 'Autorizada',
-        None si hubo un error al verificar.
-    """
-    try:
-        wait.until(EC.presence_of_element_located((By.ID, "frmAutorizaciones:tablaRegistros_data")))
-        estado_xpath = "//tbody[@id='frmAutorizaciones:tablaRegistros_data']/tr[1]/td[6]"
-        estado_element = driver.find_element(By.XPATH, estado_xpath)
-        estado_texto = estado_element.text.strip()
-        print(f"🔍 Estado encontrado en la primera fila: {estado_texto}")
-
-        if estado_texto != "Autorizada":
-            print("⚠️ El estado no es 'Autorizada'. Se detiene el proceso.")
-            return False
-        print("✅ El estado es 'Autorizada'. Se procederá con el clic en 'Ver'.")
-        return True
-
-    except Exception as e:
-        print("❌ Error al verificar el estado de la tabla:", e)
-        return None
-
 
 
 def check_authorization(driver, wait, numero_autorizacion):
@@ -85,29 +58,36 @@ def check_authorization(driver, wait, numero_autorizacion):
         print("❌ No se pudo hacer clic en Refrescar:", e)
         return
     
-    estado_valido = verificar_estado_autorizacion(driver, wait)
-    if estado_valido is None:
-        return
-    if not estado_valido:
-        return
+    time.sleep(0.5)
 
+    try:
+        # Esperar a que al menos una fila con la columna "Estado" esté visible
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, '//td[span[@class="ui-column-title" and text()="Estado"]]'))
+        )
+ 
+        # Obtener la primera celda con columna "Estado"
+        cell = driver.find_element(By.XPATH, '(//td[span[@class="ui-column-title" and text()="Estado"]])[1]')
+        full_text = cell.text.strip()
+ 
+        # Remover el encabezado si viene incluido
+        if full_text.startswith("Estado"):
+            text=full_text.replace("Estado", "").strip()
+        else:
+            text=full_text
+        print(f"Estado {text}")
 
-    # 🔍 4.5 Verificar si el estado de la fila es 'Autorizada'
-    #try:
-    #    wait.until(EC.presence_of_element_located((By.ID, "frmAutorizaciones:tablaRegistros_data")))
-    #    estado_xpath = "//tbody[@id='frmAutorizaciones:tablaRegistros_data']/tr[1]/td[6]"
-    #    estado_element = driver.find_element(By.XPATH, estado_xpath)
-    #    estado_texto = estado_element.text.strip()
-    #    print(f"🔍 Estado encontrado en la primera fila: {estado_texto}")
-
-    #    if estado_texto != "Autorizada":
-    #        print("⚠️ El estado no es 'Autorizada'. Se detiene el proceso.")
-    #        return
-    #    else:
-    #        print("✅ El estado es 'Autorizada'. Se procederá con el clic en 'Ver'.")
-    #except Exception as e:
-    #    print("❌ Error al verificar el estado de la tabla:", e)
-    #    return
+        if text != "Autorizada":
+                print("⚠️ El estado no es 'Autorizada'. Se detiene el proceso.")
+                #return
+        else:
+            print("✅ El estado es 'Autorizada'. Se procederá con el clic en 'Ver'.")
+            #except Exception as e:
+            #    print("❌ Error al verificar el estado de la tabla:", e)
+            #return
+    except Exception as e:
+        print(f"❌ No se pudo obtener el estado de la primera fila: {e}")
+    
 
     try:
         time.sleep(2)
