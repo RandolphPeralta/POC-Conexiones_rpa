@@ -79,14 +79,17 @@ def check_authorization(driver, wait, numero_autorizacion):
 
         if text != "Autorizada":
                 print("⚠️ El estado no es 'Autorizada'. Se detiene el proceso.")
+                return False
                 #return
         else:
             print("✅ El estado es 'Autorizada'. Se procederá con el clic en 'Ver'.")
+            pass
             #except Exception as e:
             #    print("❌ Error al verificar el estado de la tabla:", e)
             #return
     except Exception as e:
         print(f"❌ No se pudo obtener el estado de la primera fila: {e}")
+        return False
     
 
     try:
