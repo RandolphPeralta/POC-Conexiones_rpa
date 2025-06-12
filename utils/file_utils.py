@@ -42,19 +42,3 @@ def save_delivery_control_json(numero_autorizacion, datos):
     print(f"✅ Datos de control de entregas guardados en '{path}'")
     return str(path)
 
-"""
-def guardar_json(numero_autorizacion, datos):
-    if folder == autorizaciones:
-        folder = Path("data/autorizaciones")
-    else folder == control_entregas :
-        folder = Path("data/control_entregas")
-     
-    folder.mkdir(parents=True, exist_ok=True)
-
-    path = folder / f'documento_{numero_autorizacion}.json'
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(datos, f, ensure_ascii=False, indent=4)
-    
-    print(f"✅ Datos de control de entregas guardados en '{path}'")
-    return str(path)
-"""
