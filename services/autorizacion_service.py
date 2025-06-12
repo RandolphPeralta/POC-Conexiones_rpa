@@ -124,7 +124,7 @@ def check_authorization(driver, wait, authorization_number):
             "prestador": {
                 "tipo_documento": obtener("frmVer:j_idt161"),
                 "numero_documento": obtener("frmVer:j_idt163"),
-             #   "razon_social": obtener("frmVer:razonSocialAuditar"),
+                #"razon_social": obtener("frmVer:razonSocialAuditar"),
                 #"departamento": obtener("frmVer:departamentoIpsAuditar"),
                 #"sede_prestador": obtener("frmVer:j_idt167"),
                 #"telefono1": obtener("frmVer:j_idt169"),

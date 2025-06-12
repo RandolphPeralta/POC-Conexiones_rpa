@@ -158,10 +158,10 @@ def manage_delivery_control(driver, wait, authorization_number):
                     cells = row.find_elements(By.TAG_NAME, "td")
                     technology = {
                         #"tipo": cells[0].text,
-                        #"codigo": cells[1].text,
+                        "codigo": cells[1].text,
                         #"descripcion": cells[2].text,
                         #"cantidad": cells[3].text,
-                        "tipo_entrega": cells[4].text
+                        #"tipo_entrega": cells[4].text
                     }
                     control_data["tecnologias"].append(technology)
             except Exception as e:
