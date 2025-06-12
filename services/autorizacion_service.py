@@ -15,17 +15,17 @@ logging.basicConfig(level=logging.WARNING)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
-def check_authorization(driver, wait, numero_autorizacion):
+def check_authorization(driver, wait, authorization_number):
     """
     Gestiona las autorizaciones
     
     Args:
         driver: Instancia del navegador
         wait: Instancia de WebDriverWait
-        numero_autorizacion: Número de autorización a consultar
+        authorization_number: Número de autorización a consultar
         
     Returns:
-        datos: Diccionario con los datos de la autorizacion
+        data: Diccionario con los data de la autorizacion
     """
     try:
         wait.until(EC.element_to_be_clickable(
@@ -43,10 +43,10 @@ def check_authorization(driver, wait, numero_autorizacion):
         return
 
     try:
-        input_busqueda = wait.until(EC.presence_of_element_located(
+        input_search = wait.until(EC.presence_of_element_located(
             (By.ID, "frmAutorizaciones:tablaRegistros:j_idt80")))
-        input_busqueda.clear()
-        input_busqueda.send_keys(numero_autorizacion)
+        input_search.clear()
+        input_search.send_keys(authorization_number)
     except Exception as e:
         print("❌ No se pudo ingresar el número de autorización:", e)
         return
@@ -106,7 +106,7 @@ def check_authorization(driver, wait, numero_autorizacion):
 
         def obtener(id): return driver.find_element(By.ID, id).text
 
-        datos = {
+        data = {
             "autorizacion": {
                 "numero": obtener("frmVer:j_idt130"),
                 "origen": obtener("frmVer:j_idt132"),
@@ -161,15 +161,15 @@ def check_authorization(driver, wait, numero_autorizacion):
         }
 
         #try:
-        #    datos["observaciones"] = driver.find_element(By.ID, "frmVer:j_idt257").text.strip()
+        #    data["observaciones"] = driver.find_element(By.ID, "frmVer:j_idt257").text.strip()
         #except:
-        #    datos["observaciones"] = ""
+        #    data["observaciones"] = ""
 
         #try:
         #    filas = driver.find_elements(By.XPATH, "//tbody[@id='frmVer:tablaTecnologiasVer_data']/tr")
         #    for fila in filas:
         #        celdas = fila.find_elements(By.TAG_NAME, "td")
-        #        datos["tecnologias"].append({
+        #        data["tecnologias"].append({
         #            "tipo": celdas[0].text,
         #            "codigo": celdas[1].text,
         #            "descripcion": celdas[2].text,
@@ -179,7 +179,7 @@ def check_authorization(driver, wait, numero_autorizacion):
         #except Exception as e:
         #    print(f"⚠️ No se pudieron extraer tecnologías: {e}")
 
-        save_authorization_json(numero_autorizacion, datos)
+        save_authorization_json(authorization_number, data)
         
         # 7. Cerrar el diálogo de visualización (versión mejorada para Autorizaciones)
         try:
@@ -190,20 +190,20 @@ def check_authorization(driver, wait, numero_autorizacion):
             
             # Opción 1: Intentar cerrar con el botón X (selector específico para Autorizaciones)
             try:
-                boton_cerrar = wait.until(EC.element_to_be_clickable(
+                close_button = wait.until(EC.element_to_be_clickable(
                     (By.CSS_SELECTOR, "div.ui-dialog[aria-labelledby='dialogoVerId_title'] a.ui-dialog-titlebar-close")
                 ))
-                boton_cerrar.click()
+                close_button.click()
                 print("✅ Diálogo de Autorizaciones cerrado con el botón X")
             except Exception as e:
                 print(f"⚠️ No se pudo cerrar Autorizaciones con botón X (intentando alternativa): {str(e)}")
                 
                 # Opción 2: Intentar con el botón "Salir" si existe
                 try:
-                    boton_salir = wait.until(EC.element_to_be_clickable(
+                    exit_button = wait.until(EC.element_to_be_clickable(
                         (By.XPATH, "//div[@id='dialogoVerId']//button[contains(text(), 'Salir')]")
                     ))
-                    boton_salir.click()
+                    exit_button.click()
                     print("✅ Diálogo de Autorizaciones cerrado con el botón Salir")
                 except Exception as e:
                     print(f"⚠️ No se pudo cerrar Autorizaciones con botón Salir (intentando JavaScript): {str(e)}")
@@ -231,4 +231,4 @@ def check_authorization(driver, wait, numero_autorizacion):
         print("❌ Error al extraer datos del diálogo:", e)
         return None
         
-    return datos
+    return data

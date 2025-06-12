@@ -5,14 +5,14 @@ import time
 import json
 from utils.file_utils import save_delivery_control_json
 
-def manage_delivery_control(driver, wait, numero_autorizacion):
+def manage_delivery_control(driver, wait, authorization_number):
     """
     Gestiona el proceso de control y registro de entregas para una autorización
     
     Args:
         driver: Instancia del navegador
         wait: Instancia de WebDriverWait
-        numero_autorizacion: Número de autorización a consultar
+        authorization_number: Número de autorización a consultar
         
     Returns:
         dict: Diccionario con los datos del control de entregas
@@ -51,10 +51,10 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
 
 
     try:
-        input_busqueda = wait.until(EC.presence_of_element_located(
+        input_search = wait.until(EC.presence_of_element_located(
             (By.ID, "frmAutorizaciones:tablaRegistros:j_idt80")))
-        input_busqueda.clear()
-        input_busqueda.send_keys(numero_autorizacion)
+        input_search.clear()
+        input_search.send_keys(authorization_number)
     except Exception as e:
         print("❌ No se pudo ingresar el número de autorización:", e)
         return
@@ -69,7 +69,7 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
     time.sleep(0.5)
 
     try:
-        # Esperar a que al menos una fila con la columna "Estado" esté visible
+        # Esperar a que al menos una row con la columna "Estado" esté visible
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//td[span[@class="ui-column-title" and text()="Estado"]]'))
         )
@@ -97,15 +97,15 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
             #    print("❌ Error al verificar el estado de la tabla:", e)
             #return
     except Exception as e:
-        print(f"❌ No se pudo obtener el estado de la primera fila: {e}")
+        print(f"❌ No se pudo obtener el estado de la primera row: {e}")
         return False
     
     try:
         # Esperar a que se cierre completamente el diálogo anterior
         time.sleep(2)
         
-        # Diccionario para almacenar los resultados
-        resultados = {
+        # Diccionario para almacenar los results
+        results = {
             'success': False,
             'data': None,
             'error': None,
@@ -114,29 +114,29 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
 
         # 1. Hacer clic en "Control y Registro de Entregas"
         try:
-            boton_control = wait.until(EC.element_to_be_clickable((
+            control_button = wait.until(EC.element_to_be_clickable((
                 By.XPATH, "//button[@title='Control y registro de entregas' and contains(@class, 'ui-button')]"
             )))
-            boton_control.click()
+            control_button.click()
             print("✅ Se hizo clic en 'Control y registro de entregas' correctamente.")
         except Exception as e:
             error_msg = f"No se pudo hacer clic en el botón de control: {str(e)}"
             print(f"❌ {error_msg}")
-            resultados['error'] = error_msg
-            return resultados
+            results['error'] = error_msg
+            return results
 
         # 2. Esperar y extraer información del diálogo
         try:
             # Esperar a que el diálogo esté visible
             wait.until(EC.visibility_of_element_located((By.ID, "j_idt281")))
             
-            datos_control = {
+            control_data = {
                 "informacion_autorizacion": {},
                 "tecnologias": []
             }
             
             # Extraer información de autorización
-            datos_control["informacion_autorizacion"] = {
+            control_data["informacion_autorizacion"] = {
                 "autorizacion": driver.find_element(By.ID, "frmGestionar:j_idt286").text,
                 "origen": driver.find_element(By.ID, "frmGestionar:j_idt288").text,
                 #"anexo_3": driver.find_element(By.ID, "frmGestionar:j_idt292").text,
@@ -151,33 +151,33 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
             
             # Extraer tecnologías con estado de entrega
             try:
-                filas_tecnologias = driver.find_elements(
+                rows_technologies = driver.find_elements(
                     By.XPATH, "//div[@id='frmGestionar:pTecnologiasGestionar_content']//tbody[@id='frmGestionar:tablaTecnologiasGestionar_data']/tr")
                 
-                for fila in filas_tecnologias:
-                    celdas = fila.find_elements(By.TAG_NAME, "td")
-                    tecnologia = {
-                        #"tipo": celdas[0].text,
-                        #"codigo": celdas[1].text,
-                        #"descripcion": celdas[2].text,
-                        #"cantidad": celdas[3].text,
-                        "tipo_entrega": celdas[4].text
+                for row in rows_technologies:
+                    cells = row.find_elements(By.TAG_NAME, "td")
+                    technology = {
+                        #"tipo": cells[0].text,
+                        #"codigo": cells[1].text,
+                        #"descripcion": cells[2].text,
+                        #"cantidad": cells[3].text,
+                        "tipo_entrega": cells[4].text
                     }
-                    datos_control["tecnologias"].append(tecnologia)
+                    control_data["tecnologias"].append(technology)
             except Exception as e:
                 print(f"⚠️ No se pudieron extraer las tecnologías: {e}")
 
             # Guardar en JSON usando la función modularizada
-            ruta_archivo = save_delivery_control_json(numero_autorizacion, datos_control)
+            ruta_archivo = save_delivery_control_json(authorization_number, control_data)
             
-            resultados['success'] = True
-            resultados['data'] = datos_control
-            resultados['filepath'] = ruta_archivo
+            results['success'] = True
+            results['data'] = control_data
+            results['filepath'] = ruta_archivo
 
         except Exception as e:
             error_msg = f"Error al extraer datos del diálogo de control: {str(e)}"
             print(f"❌ {error_msg}")
-            resultados['error'] = error_msg
+            results['error'] = error_msg
 
         # 3. Cerrar el diálogo de Control y Registro de Entregas (versión mejorada)
         try:
@@ -186,20 +186,20 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
             
             # Opción 1: Intentar cerrar con el botón X (versión más específica)
             try:
-                boton_cerrar = wait.until(EC.element_to_be_clickable(
+                close_button = wait.until(EC.element_to_be_clickable(
                     (By.CSS_SELECTOR, "div.ui-dialog[aria-labelledby='j_idt281_title'] a.ui-dialog-titlebar-close")
                 ))
-                boton_cerrar.click()
+                close_button.click()
                 print("✅ Diálogo de control cerrado con el botón X (selector específico)")
             except Exception as e:
                 print(f"⚠️ No se pudo cerrar con botón X (intentando alternativa): {str(e)}")
                 
                 # Opción 2: Intentar con el botón Salir si existe
                 try:
-                    boton_salir = wait.until(EC.element_to_be_clickable(
+                    exit_button = wait.until(EC.element_to_be_clickable(
                         (By.XPATH, "//div[@id='j_idt281']//button[contains(text(), 'Salir')]")
                     ))
-                    boton_salir.click()
+                    exit_button.click()
                     print("✅ Diálogo de control cerrado con el botón Salir")
                 except Exception as e:
                     print(f"⚠️ No se pudo cerrar con botón Salir (intentando JavaScript): {str(e)}")
@@ -223,10 +223,10 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
         except Exception as e:
             print(f"❌ Error grave al intentar cerrar el diálogo: {str(e)}")
 
-        return resultados
+        return results
 
     except Exception as e:
         error_msg = f"Error inesperado en gestionar_control_entregas: {str(e)}"
         print(f"❌ {error_msg}")
-        resultados['error'] = error_msg
-        return resultados
+        results['error'] = error_msg
+        return results
