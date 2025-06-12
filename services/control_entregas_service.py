@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import json
-from utils.file_utils import guardar_control_entregas_json
+from utils.file_utils import save_delivery_control_json
 
 def manage_delivery_control(driver, wait, numero_autorizacion):
     """
@@ -139,7 +139,7 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
             datos_control["informacion_autorizacion"] = {
                 "autorizacion": driver.find_element(By.ID, "frmGestionar:j_idt286").text,
                 "origen": driver.find_element(By.ID, "frmGestionar:j_idt288").text,
-                "anexo_3": driver.find_element(By.ID, "frmGestionar:j_idt292").text,
+                #"anexo_3": driver.find_element(By.ID, "frmGestionar:j_idt292").text,
                 #"cantidad_entregas": driver.find_element(By.ID, "frmGestionar:j_idt294").text,
                 #"fecha_inicio": driver.find_element(By.ID, "frmGestionar:j_idt296").text,
                 #"fecha_fin": driver.find_element(By.ID, "frmGestionar:j_idt298").text,
@@ -168,7 +168,7 @@ def manage_delivery_control(driver, wait, numero_autorizacion):
                 print(f"⚠️ No se pudieron extraer las tecnologías: {e}")
 
             # Guardar en JSON usando la función modularizada
-            ruta_archivo = guardar_control_entregas_json(numero_autorizacion, datos_control)
+            ruta_archivo = save_delivery_control_json(numero_autorizacion, datos_control)
             
             resultados['success'] = True
             resultados['data'] = datos_control

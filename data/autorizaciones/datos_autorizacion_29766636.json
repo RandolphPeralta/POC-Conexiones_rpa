@@ -6,20 +6,13 @@
     },
     "prestador": {
         "tipo_documento": "NI",
-        "numero_documento": "800250192",
-        "razon_social": "PRODIAGNOSTICO CLINICA VICTORIANA"
+        "numero_documento": "800250192"
     },
     "paciente": {
         "nombre": "GLORIA ELENA ACEVEDO BEDOYA",
         "documento": "43847886",
-        "contrato": "0084-2025",
         "regimen": "SUBSIDIADO",
         "tipo_documento": "CC",
-        "fecha_nacimiento": "1979-07-31",
-        "direccion": "CORREGIMIENTO GUAYABAL",
-        "genero": "Femenino",
-        "nivel_sisben": "1",
-        "servicio": "Cirugia General (Consulta Ext)",
-        "diagnostico_principal": "R103 - Dolor localizado en otras partes inferiores del abdomen"
+        "genero": "Femenino"
     }
 }

@@ -6,20 +6,13 @@
     },
     "prestador": {
         "tipo_documento": "NI",
-        "numero_documento": "800250192",
-        "razon_social": "PRODIAGNOSTICO RIONEGRO"
+        "numero_documento": "800250192"
     },
     "paciente": {
         "nombre": "SOCORRO BETANCOURT DE MONSALVE",
         "documento": "21783945",
-        "contrato": "0084-2025",
         "regimen": "SUBSIDIADO",
         "tipo_documento": "CC",
-        "fecha_nacimiento": "1952-11-13",
-        "direccion": "CRA 52 52 477",
-        "genero": "Femenino",
-        "nivel_sisben": "2",
-        "servicio": "Medicina General (Consulta Ext)",
-        "diagnostico_principal": "E109 - Diabetes mellitus insulinodependiente sin mencion de complicacion"
+        "genero": "Femenino"
     }
 }

@@ -3,7 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 import time
 import json
-from utils.file_utils import guardar_autorizacion_json
+from utils.file_utils import save_authorization_json
 
 # Agregar al inicio del script para suprimir logs no deseados
 from selenium.webdriver.remote.remote_connection import LOGGER
@@ -124,7 +124,7 @@ def check_authorization(driver, wait, numero_autorizacion):
             "prestador": {
                 "tipo_documento": obtener("frmVer:j_idt161"),
                 "numero_documento": obtener("frmVer:j_idt163"),
-                "razon_social": obtener("frmVer:razonSocialAuditar"),
+             #   "razon_social": obtener("frmVer:razonSocialAuditar"),
                 #"departamento": obtener("frmVer:departamentoIpsAuditar"),
                 #"sede_prestador": obtener("frmVer:j_idt167"),
                 #"telefono1": obtener("frmVer:j_idt169"),
@@ -136,15 +136,15 @@ def check_authorization(driver, wait, numero_autorizacion):
             "paciente": {
                 "nombre": obtener("frmVer:j_idt181"),
                 "documento": obtener("frmVer:j_idt183"),
-                "contrato": obtener("frmVer:j_idt185"),
+            #    "contrato": obtener("frmVer:j_idt185"),
                 "regimen": obtener("frmVer:j_idt187"),
                 "tipo_documento": obtener("frmVer:j_idt191"),
-                "fecha_nacimiento": obtener("frmVer:j_idt193"),
-                "direccion": obtener("frmVer:j_idt195"),
+            #    "fecha_nacimiento": obtener("frmVer:j_idt193"),
+            #    "direccion": obtener("frmVer:j_idt195"),
                 "genero": obtener("frmVer:j_idt197"),
-                "nivel_sisben": obtener("frmVer:j_idt199"),
-                "servicio": obtener("frmVer:j_idt201"),
-                "diagnostico_principal": obtener("frmVer:j_idt203")
+            #    "nivel_sisben": obtener("frmVer:j_idt199"),
+            #    "servicio": obtener("frmVer:j_idt201"),
+            #    "diagnostico_principal": obtener("frmVer:j_idt203")
             },
             #"tecnologias": [],
             #"pagos_compartidos": {
@@ -179,7 +179,7 @@ def check_authorization(driver, wait, numero_autorizacion):
         #except Exception as e:
         #    print(f"⚠️ No se pudieron extraer tecnologías: {e}")
 
-        guardar_autorizacion_json(numero_autorizacion, datos)
+        save_authorization_json(numero_autorizacion, datos)
         
         # 7. Cerrar el diálogo de visualización (versión mejorada para Autorizaciones)
         try:

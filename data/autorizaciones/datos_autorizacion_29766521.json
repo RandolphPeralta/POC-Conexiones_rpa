@@ -6,20 +6,13 @@
     },
     "prestador": {
         "tipo_documento": "NI",
-        "numero_documento": "800250192",
-        "razon_social": "PRO DIAGNOSTICO LAS VEGAS"
+        "numero_documento": "800250192"
     },
     "paciente": {
         "nombre": "NIDIA THAYU FORNERINO CONTRERAS",
         "documento": "2603107",
-        "contrato": "0084-2025",
         "regimen": "SUBSIDIADO",
         "tipo_documento": "PT",
-        "fecha_nacimiento": "1977-04-21",
-        "direccion": "CRA 98 CC 79 B 84",
-        "genero": "Femenino",
-        "nivel_sisben": "O",
-        "servicio": "Medicina General (Consulta Ext)",
-        "diagnostico_principal": "I872 - Insuficiencia venosa (cronica) (periferica)"
+        "genero": "Femenino"
     }
 }

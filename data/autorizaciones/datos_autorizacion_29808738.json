@@ -6,20 +6,13 @@
     },
     "prestador": {
         "tipo_documento": "NI",
-        "numero_documento": "800250192",
-        "razon_social": "PRODIAGNOSTICO RIONEGRO"
+        "numero_documento": "800250192"
     },
     "paciente": {
         "nombre": "LUZ FAYNELLY MIRA MARTINEZ",
         "documento": "21431710",
-        "contrato": "0084-2025",
         "regimen": "CONTRIBUTIVO",
         "tipo_documento": "CC",
-        "fecha_nacimiento": "1976-12-21",
-        "direccion": "CALLE 20 18 15",
-        "genero": "Femenino",
-        "nivel_sisben": "N",
-        "servicio": "Medicina General (Consulta Ext)",
-        "diagnostico_principal": "E109 - Diabetes mellitus insulinodependiente sin mencion de complicacion"
+        "genero": "Femenino"
     }
 }

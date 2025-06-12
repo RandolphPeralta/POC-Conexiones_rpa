@@ -6,20 +6,13 @@
     },
     "prestador": {
         "tipo_documento": "NI",
-        "numero_documento": "800250192",
-        "razon_social": "PRO DIAGNOSTICO LAS VEGAS"
+        "numero_documento": "800250192"
     },
     "paciente": {
         "nombre": "YERLY TATIANA SERNA MORENO",
         "documento": "1020450735",
-        "contrato": "0084-2025",
         "regimen": "SUBSIDIADO",
         "tipo_documento": "CC",
-        "fecha_nacimiento": "1992-04-09",
-        "direccion": "CL 20 CB 39 D 24 IN 206",
-        "genero": "Femenino",
-        "nivel_sisben": "N",
-        "servicio": "Cirugia Gastrointestinal (Consulta Ext)",
-        "diagnostico_principal": "N750 - Quiste de la glandula de Bartholin"
+        "genero": "Femenino"
     }
 }

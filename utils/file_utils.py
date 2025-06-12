@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-def guardar_autorizacion_json(numero_autorizacion, datos):
+def save_authorization_json(numero_autorizacion, datos):
     carpeta = Path("data/autorizaciones")
     carpeta.mkdir(parents=True, exist_ok=True)
 
@@ -11,7 +11,7 @@ def guardar_autorizacion_json(numero_autorizacion, datos):
     
     print(f"✅ Datos de autorización guardados en '{ruta}'")
 
-def guardar_control_entregas_json(numero_autorizacion, datos):
+def save_delivery_control_json(numero_autorizacion, datos):
     """
     Guarda los datos de control de entregas en un archivo JSON dentro de la carpeta data/control_entregas
     
