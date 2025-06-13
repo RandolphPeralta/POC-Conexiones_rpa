@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.WARNING)
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 
-def process_authorization(driver, wait, number, time_limit_minutes=2):
+def process_authorization(driver, wait, number, time_limit_minutes=3):
     """
     Procesa una autorización específica, incluyendo su consulta y la gestión de entregas.
 
@@ -88,7 +88,7 @@ def process_authorization(driver, wait, number, time_limit_minutes=2):
             print(f"❌ Falló control de entregas para {number}")
             return False
         
-        
+
         time.sleep(0.5)
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         # Gestionar control de entregas
