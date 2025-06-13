@@ -6,7 +6,7 @@ import time
 import json
 from selenium.webdriver.common.keys import Keys
 
-fecha = "12/06/2025"
+date = "12/06/2025"
 
 def check_date(driver, wait, authorization_number):
     """
@@ -19,7 +19,7 @@ def check_date(driver, wait, authorization_number):
         authorization_number: Número de autorización a consultar
         
     Returns:
-        Cambio de fecha dentro del HTML
+        Cambio de date dentro del HTML
     """
 
     time.sleep(0.5)
@@ -103,28 +103,28 @@ def check_date(driver, wait, authorization_number):
             text=full_text
             print(f"Tipo Entrega {text}")
 
-        estado = text
-        if estado != "Sin Entrega":
-                print(" ✅ El estado Tipo Entrega 'Autorizada'. Se detiene el proceso.")
-                return None, estado
+        status = text
+        if status != "Sin Entrega":
+                print(" ✅ El Estado Tipo Entrega 'Autorizada'. Se detiene el proceso.")
+                return None
             #return
-        elif estado == "Sin Entrega":
+        elif status == "Sin Entrega":
             print("⚠️ El Tipo Entrega es 'Sin Entrega'. Se procederá con el clic en 'Entrega'.")
             pass
             #except Exception as e:
-            #    print("❌ Error al verificar el estado de la tabla:", e)
+            #    print("❌ Error al verificar el status de la tabla:", e)
             #return
     except Exception as e:
-        print(f"❌ No se pudo obtener el estado de la primera fila: {e}")
+        print(f"❌ No se pudo obtener el status de la primera fila: {e}")
         #return False
 
 
     try:
         # Esperar a que aparezca la tabla con los botones de entrega (ajusta el tiempo si es necesario)
-        entrega_button = wait.until(EC.element_to_be_clickable((
+        delivery_button = wait.until(EC.element_to_be_clickable((
             By.XPATH, "//button[@title='Entregar' and contains(@class, 'ui-button-icon-only')]"
         )))
-        entrega_button.click()
+        delivery_button.click()
         print("✅ Se hizo clic en el botón 'Entregar' correctamente.")
     except Exception as e:
         print(f"❌ No se pudo hacer clic en el botón 'Entregar': {e}")
@@ -134,20 +134,20 @@ def check_date(driver, wait, authorization_number):
     
 
     try:
-        # Esperar a que esté presente el campo de fecha
-        input_fecha = wait.until(EC.presence_of_element_located((
+        # Esperar a que esté presente el campo de date
+        input_date = wait.until(EC.presence_of_element_located((
             By.ID, "frmEntrega:fechaEntregaGestionar_input"
         )))
 
         # Limpiar el campo con .clear() y/o teclas especiales
-        input_fecha.click()
-        input_fecha.send_keys(Keys.CONTROL + "a")  # Seleccionar todo
-        input_fecha.send_keys(Keys.DELETE)         # Borrar contenido
+        input_date.click()
+        input_date.send_keys(Keys.CONTROL + "a")  # Seleccionar todo
+        input_date.send_keys(Keys.DELETE)         # Borrar contenido
 
-        # Ingresar la nueva fecha (en el formato que el sistema espera, por ejemplo: dd/mm/yyyy)
-        fecha_deseada = fecha
-        input_fecha.send_keys(fecha_deseada)
-        print(f"✅ Fecha ingresada correctamente: {fecha_deseada}")
+        # Ingresar la nueva date (en el formato que el sistema espera, por ejemplo: dd/mm/yyyy)
+        desired_date = date
+        input_date.send_keys(desired_date)
+        print(f"✅ Fecha ingresada correctamente: {desired_date}")
 
     except Exception as e:
         print(f"❌ No se pudo ingresar la fecha en el campo: {e}")
@@ -179,14 +179,14 @@ def check_date(driver, wait, authorization_number):
             print(f"⚠️ No se pudo cerrar con botón X (intentando alternativa): {str(e)}")
                 
         # Opción 2: Intentar con el botón Salir si existe
-        try:
-            exit_button = wait.until(EC.element_to_be_clickable(
-                (By.XPATH, "//div[@id='j_idt281']//button[contains(text(), 'Salir')]")
-            ))
-            exit_button.click()
-            print("✅ Diálogo de control cerrado con el botón Salir")
-        except Exception as e:
-            print(f"⚠️ No se pudo cerrar con botón Salir (intentando JavaScript): {str(e)}")
+        #try:
+        #    exit_button = wait.until(EC.element_to_be_clickable(
+        #        (By.XPATH, "//div[@id='j_idt281']//button[contains(text(), 'Salir')]")
+        #    ))
+        #    exit_button.click()
+        #    print("✅ Diálogo de control cerrado con el botón Salir")
+        #except Exception as e:
+        #    print(f"⚠️ No se pudo cerrar con botón Salir (intentando JavaScript): {str(e)}")
                     
         # Opción 3: Forzar cierre con JavaScript
         try:
