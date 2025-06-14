@@ -179,7 +179,9 @@ def check_authorization(driver, wait, authorization_number):
         #except Exception as e:
         #    print(f"⚠️ No se pudieron extraer tecnologías: {e}")
 
-        save_authorization_json(authorization_number, data)
+        print(data)
+
+        #save_authorization_json(authorization_number, data)
         
         # 7. Cerrar el diálogo de visualización (versión mejorada para Autorizaciones)
         try:

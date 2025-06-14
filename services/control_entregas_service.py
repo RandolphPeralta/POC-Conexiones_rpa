@@ -168,11 +168,12 @@ def manage_delivery_control(driver, wait, authorization_number):
                 print(f"⚠️ No se pudieron extraer las tecnologías: {e}")
 
             # Guardar en JSON usando la función modularizada
-            ruta_archivo = save_delivery_control_json(authorization_number, control_data)
-            
+            #ruta_archivo = save_delivery_control_json(authorization_number, control_data)
+            print(control_data)
+
             results['success'] = True
             results['data'] = control_data
-            results['filepath'] = ruta_archivo
+            #results['filepath'] = ruta_archivo
 
         except Exception as e:
             error_msg = f"Error al extraer datos del diálogo de control: {str(e)}"
