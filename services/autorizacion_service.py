@@ -109,8 +109,8 @@ def check_authorization(driver, wait, authorization_number):
         data = {
             "autorizacion": {
                 "numero": obtener("frmVer:j_idt130"),
-                "origen": obtener("frmVer:j_idt132"),
-                "solicitud": obtener("frmVer:j_idt137"),
+                #"origen": obtener("frmVer:j_idt132"),
+                #"solicitud": obtener("frmVer:j_idt137"),
                 #"cantidad_entregas": obtener("frmVer:j_idt139"),
                 #"fecha_inicio": obtener("frmVer:j_idt141"),
                 #"fecha_fin": obtener("frmVer:j_idt143"),
@@ -121,9 +121,9 @@ def check_authorization(driver, wait, authorization_number):
                 #"ambito": obtener("frmVer:j_idt153"),
                 #"contrato_anticipado": obtener("frmVer:j_idt155")
             },
-            "prestador": {
-                "tipo_documento": obtener("frmVer:j_idt161"),
-                "numero_documento": obtener("frmVer:j_idt163"),
+            #"prestador": {
+                #"tipo_documento": obtener("frmVer:j_idt161"),
+                #"numero_documento": obtener("frmVer:j_idt163"),
                 #"razon_social": obtener("frmVer:razonSocialAuditar"),
                 #"departamento": obtener("frmVer:departamentoIpsAuditar"),
                 #"sede_prestador": obtener("frmVer:j_idt167"),
@@ -132,13 +132,13 @@ def check_authorization(driver, wait, authorization_number):
                 #"correo": obtener("frmVer:j_idt171"),
                 #"municipio": obtener("frmVer:j_idt175"),
                 #"direccion": obtener("frmVer:j_idt177")
-            },
+            #},
             "paciente": {
                 "nombre": obtener("frmVer:j_idt181"),
                 "documento": obtener("frmVer:j_idt183"),
             #    "contrato": obtener("frmVer:j_idt185"),
                 "regimen": obtener("frmVer:j_idt187"),
-                "tipo_documento": obtener("frmVer:j_idt191"),
+                #"tipo_documento": obtener("frmVer:j_idt191"),
             #    "fecha_nacimiento": obtener("frmVer:j_idt193"),
             #    "direccion": obtener("frmVer:j_idt195"),
                 "genero": obtener("frmVer:j_idt197"),
@@ -179,7 +179,7 @@ def check_authorization(driver, wait, authorization_number):
         #except Exception as e:
         #    print(f"⚠️ No se pudieron extraer tecnologías: {e}")
 
-        print(data)
+        #print(data)
 
         #save_authorization_json(authorization_number, data)
         

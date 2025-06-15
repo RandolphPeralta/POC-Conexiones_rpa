@@ -138,7 +138,7 @@ def manage_delivery_control(driver, wait, authorization_number):
             # Extraer información de autorización
             control_data["informacion_autorizacion"] = {
                 "autorizacion": driver.find_element(By.ID, "frmGestionar:j_idt286").text,
-                "origen": driver.find_element(By.ID, "frmGestionar:j_idt288").text,
+                #"origen": driver.find_element(By.ID, "frmGestionar:j_idt288").text,
                 #"anexo_3": driver.find_element(By.ID, "frmGestionar:j_idt292").text,
                 #"cantidad_entregas": driver.find_element(By.ID, "frmGestionar:j_idt294").text,
                 #"fecha_inicio": driver.find_element(By.ID, "frmGestionar:j_idt296").text,
@@ -169,7 +169,7 @@ def manage_delivery_control(driver, wait, authorization_number):
 
             # Guardar en JSON usando la función modularizada
             #ruta_archivo = save_delivery_control_json(authorization_number, control_data)
-            print(control_data)
+            #print(control_data)
 
             results['success'] = True
             results['data'] = control_data

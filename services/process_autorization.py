@@ -58,12 +58,19 @@ def process_authorization(driver, wait, number, time_limit_minutes=3):
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
         # Nuevo: obtener estado junto con éxito
-        exito = check_authorization(driver, wait, number)
+        #exito = check_authorization(driver, wait, number)
 
-        if not exito:
-            print(f"❌ Falló consulta para {number}")
+        #if not exito:
+        #    print(f"❌ Falló consulta para {number}")
+        #    return False
+
+        auth_data = check_authorization(driver, wait, number)
+
+        if not auth_data:
+            print(f"Falló consulta para {number}")
             return False
-
+        
+        
         #if estado.lower() != "autorizada":
         #    print(f"⛔ Estado no autorizado ({estado}) para {number}. Saltando...")
         #    return True  # No es error crítico, simplemente lo salta        
@@ -84,10 +91,30 @@ def process_authorization(driver, wait, number, time_limit_minutes=3):
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
         
         # Gestionar control de entregas
-        if not manage_delivery_control(driver, wait, number):
-            print(f"❌ Falló control de entregas para {number}")
-            return False
+        #if not manage_delivery_control(driver, wait, number):
+        #    print(f"❌ Falló control de entregas para {number}")
+        #    return False
+
+        control_result = manage_delivery_control(driver, wait, number)
+        if not control_result or not control_result.get("success"):
+            return None
+
+
+        control_data = control_result.get("data", {})
+        tecnologias = control_data.get("tecnology", [])
+        technology_code = tecnologias[0]["code"] if tecnologias else None
+
+        # ✅ Consolidar JSON final
+        result_json = {
+            "authorization_code": auth_data["autorizacion"]["numero"],
+            "document": auth_data["paciente"]["documento"],
+            "patient_name": auth_data["paciente"]["nombre"],
+            "government": auth_data["paciente"]["regimen"],
+            "gender": auth_data["paciente"]["genero"],
+            "cups_code": technology_code
+        }
         
+        return result_json, print(result_json)        
 
         time.sleep(0.5)
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
