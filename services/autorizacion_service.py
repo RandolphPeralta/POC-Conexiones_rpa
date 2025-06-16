@@ -44,7 +44,7 @@ def check_authorization(driver, wait, authorization_number):
 
     try:
         input_search = wait.until(EC.presence_of_element_located(
-            (By.ID, "frmAutorizaciones:tablaRegistros:j_idt80")))
+            (By.ID, "frmAutorizaciones:tablaRegistros:j_idt78")))
         input_search.clear()
         input_search.send_keys(authorization_number)
     except Exception as e:

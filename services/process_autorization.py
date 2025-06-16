@@ -98,7 +98,13 @@ def process_authorization(driver, wait, number, time_limit_minutes=3):
         control_result = manage_delivery_control(driver, wait, number)
         if not control_result or not control_result.get("success"):
             return None
-
+        
+        time.sleep(0.5)
+        wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
+        # Gestionar las fechas de control de entregas
+        if not check_date(driver, wait, number):
+            print(f"⚙️ Revision de control de fechas de entregas para {number} terminado")
+            return True
 
         control_data = control_result.get("data", {})
         tecnologias = control_data.get("tecnology", [])
@@ -116,12 +122,6 @@ def process_authorization(driver, wait, number, time_limit_minutes=3):
         
         return result_json, print(result_json)        
 
-        time.sleep(0.5)
-        wait.until(EC.presence_of_element_located((By.TAG_NAME, "h3")))
-        # Gestionar las fechas de control de entregas
-        if not check_date(driver, wait, number):
-            print(f"⚙️ Revision de control de fechas de entregas para {number} terminado")
-            return True
             
         return True
         
