@@ -120,10 +120,11 @@ def process_authorization(driver, wait, number, time_limit_minutes=3):
             "cups_code": technology_code
         }
         
-        return result_json, print(result_json)        
+        return result_json, print(result_json)
+        #print(result_json)        
 
             
-        return True
+        #return True
         
     except Exception as e:
         print(f"❌ Error crítico al procesar {number}: {str(e)}")

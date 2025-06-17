@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import json
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import TimeoutException
 
 date = "12/06/2025"
 
@@ -120,10 +121,12 @@ def check_date(driver, wait, authorization_number):
 
     #PARA DARLE A OTRA TECNOLOGIA Y CAMBIAR SU FECHA RESPECTIVA
 
-    for i in range(2):
+    for i in range(10):  # Usa un número suficientemente alto como límite
         try:
             button_id = f"frmGestionar:tablaTecnologiasGestionar:{i}:j_idt319"
-            tech_button = wait.until(EC.element_to_be_clickable((By.ID, button_id)))
+
+            # Intentar encontrar el botón sin esperar mucho (para detectar fin de lista)
+            tech_button = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.ID, button_id)))
             tech_button.click()
             print(f"✅ Se hizo clic en el botón 'Entregar' de la tecnología #{i}")
 
@@ -148,8 +151,12 @@ def check_date(driver, wait, authorization_number):
 
             time.sleep(1)  # Pausa opcional adicional
 
+        except TimeoutException:
+            print(f"ℹ️ No se encontró tecnología #{i}, se asume que no hay más tecnologías por entregar.")
+            break
         except Exception as e:
             print(f"❌ Error en tecnología #{i}: {e}")
+            break  # Si hay un error inesperado, también puedes cortar el ciclo si lo prefieres
 
     
     
