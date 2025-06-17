@@ -169,7 +169,7 @@ def manage_delivery_control(driver, wait, authorization_number):
 
             # Guardar en JSON usando la función modularizada
             #ruta_archivo = save_delivery_control_json(authorization_number, control_data)
-            #print(control_data)
+            print(control_data)
 
             results['success'] = True
             results['data'] = control_data

@@ -179,7 +179,7 @@ def check_authorization(driver, wait, authorization_number):
         #except Exception as e:
         #    print(f"⚠️ No se pudieron extraer tecnologías: {e}")
 
-        #print(data)
+        print(data)
 
         #save_authorization_json(authorization_number, data)
         
