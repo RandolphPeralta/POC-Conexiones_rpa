@@ -118,49 +118,91 @@ def check_date(driver, wait, authorization_number):
         print(f"❌ No se pudo obtener el status de la primera fila: {e}")
         #return False
 
+    #PARA DARLE A OTRA TECNOLOGIA Y CAMBIAR SU FECHA RESPECTIVA
 
-    try:
+    for i in range(2):
+        try:
+            button_id = f"frmGestionar:tablaTecnologiasGestionar:{i}:j_idt319"
+            tech_button = wait.until(EC.element_to_be_clickable((By.ID, button_id)))
+            tech_button.click()
+            print(f"✅ Se hizo clic en el botón 'Entregar' de la tecnología #{i}")
+
+            # Esperar a que el campo de fecha aparezca y esté interactuable
+            input_date = wait.until(EC.visibility_of_element_located((By.ID, "frmEntrega:fechaEntregaGestionar_input")))
+            input_date.click()
+            input_date.send_keys(Keys.CONTROL + "a")
+            input_date.send_keys(Keys.DELETE)
+            input_date.send_keys(date)
+            print(f"✅ Fecha ingresada para tecnología #{i}")
+
+            # Cerrar el diálogo
+            close_btn = wait.until(EC.element_to_be_clickable((
+                By.XPATH, "//div[contains(@class, 'ui-dialog-titlebar') and .//span[text()='Entregar']]//a[contains(@class, 'ui-dialog-titlebar-close')]"
+            )))
+            close_btn.click()
+            print(f"✅ Diálogo cerrado para tecnología #{i}")
+
+            # Esperar a que el diálogo se cierre completamente
+            wait.until(EC.invisibility_of_element_located((By.ID, "frmEntrega")))
+            print("🕒 Confirmado que el diálogo de entrega se ha cerrado")
+
+            time.sleep(1)  # Pausa opcional adicional
+
+        except Exception as e:
+            print(f"❌ Error en tecnología #{i}: {e}")
+
+    
+    
+
+
+
+
+
+
+
+
+    #try:
         # Esperar a que aparezca la tabla con los botones de entrega (ajusta el tiempo si es necesario)
-        delivery_button = wait.until(EC.element_to_be_clickable((
-            By.XPATH, "//button[@title='Entregar' and contains(@class, 'ui-button-icon-only')]"
-        )))
-        delivery_button.click()
-        print("✅ Se hizo clic en el botón 'Entregar' correctamente.")
-    except Exception as e:
-        print(f"❌ No se pudo hacer clic en el botón 'Entregar': {e}")
+    #    delivery_button = wait.until(EC.element_to_be_clickable((
+    #        By.XPATH, "//button[@title='Entregar' and contains(@class, 'ui-button-icon-only')]"
+    #    )))
+    #    delivery_button.click()
+    #    print("✅ Se hizo clic en el botón 'Entregar' correctamente.")
+    #except Exception as e:
+    #    print(f"❌ No se pudo hacer clic en el botón 'Entregar': {e}")
 
 
 
     
 
-    try:
+    #try:
         # Esperar a que esté presente el campo de date
-        input_date = wait.until(EC.presence_of_element_located((
-            By.ID, "frmEntrega:fechaEntregaGestionar_input"
-        )))
+    #    input_date = wait.until(EC.presence_of_element_located((
+    #        By.ID, "frmEntrega:fechaEntregaGestionar_input"
+    #    )))
 
         # Limpiar el campo con .clear() y/o teclas especiales
-        input_date.click()
-        input_date.send_keys(Keys.CONTROL + "a")  # Seleccionar todo
-        input_date.send_keys(Keys.DELETE)         # Borrar contenido
+    #    input_date.click()
+    #    input_date.send_keys(Keys.CONTROL + "a")  # Seleccionar todo
+    #    input_date.send_keys(Keys.DELETE)         # Borrar contenido
 
         # Ingresar la nueva date (en el formato que el sistema espera, por ejemplo: dd/mm/yyyy)
-        desired_date = date
-        input_date.send_keys(desired_date)
-        print(f"✅ Fecha ingresada correctamente: {desired_date}")
+    #    desired_date = date
+    #    input_date.send_keys(desired_date)
+    #    print(f"✅ Fecha ingresada correctamente: {desired_date}")
 
-    except Exception as e:
-        print(f"❌ No se pudo ingresar la fecha en el campo: {e}")
+    #except Exception as e:
+    #    print(f"❌ No se pudo ingresar la fecha en el campo: {e}")
 
-    try:
+    #try:
         # Esperar a que el botón de cerrar (ícono X) esté presente y clickeable
-        close_button = wait.until(EC.element_to_be_clickable((
-            By.XPATH, "//div[contains(@class, 'ui-dialog-titlebar') and .//span[text()='Entregar']]//a[contains(@class, 'ui-dialog-titlebar-close')]"
-        )))
-        close_button.click()
-        print("✅ Se cerró la ventana de 'Entregar' correctamente.")
-    except Exception as e:
-        print(f"❌ No se pudo cerrar la ventana de 'Entregar': {e}")
+    #    close_button = wait.until(EC.element_to_be_clickable((
+    #        By.XPATH, "//div[contains(@class, 'ui-dialog-titlebar') and .//span[text()='Entregar']]//a[contains(@class, 'ui-dialog-titlebar-close')]"
+    #    )))
+    #    close_button.click()
+    #    print("✅ Se cerró la ventana de 'Entregar' correctamente.")
+    #except Exception as e:
+    #    print(f"❌ No se pudo cerrar la ventana de 'Entregar': {e}")
 
 
     # 3. Cerrar el diálogo de Control y Registro de Entregas (versión mejorada)
