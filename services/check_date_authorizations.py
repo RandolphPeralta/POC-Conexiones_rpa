@@ -7,7 +7,7 @@ import json
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
 
-date = "12/06/2025"
+#date = "12/06/2025"
 
 def check_date(driver, wait, authorization_number):
     """
@@ -119,9 +119,18 @@ def check_date(driver, wait, authorization_number):
         print(f"❌ No se pudo obtener el status de la primera fila: {e}")
         #return False
 
+
+
+
+
+
+
+
     #PARA DARLE A OTRA TECNOLOGIA Y CAMBIAR SU FECHA RESPECTIVA
 
-    for i in range(10):  # Usa un número suficientemente alto como límite
+    fechas = ["12/06/2025", "14/06/2025", "15/06/2025"]  # Cambia esto según tus autorizaciones
+
+    for i in range(len(fechas)):  # Limita el rango a la cantidad de fechas
         try:
             button_id = f"frmGestionar:tablaTecnologiasGestionar:{i}:j_idt319"
 
@@ -135,8 +144,8 @@ def check_date(driver, wait, authorization_number):
             input_date.click()
             input_date.send_keys(Keys.CONTROL + "a")
             input_date.send_keys(Keys.DELETE)
-            input_date.send_keys(date)
-            print(f"✅ Fecha ingresada para tecnología #{i}")
+            input_date.send_keys(fechas[i])
+            print(f"✅ Fecha ingresada para tecnología #{i}: {fechas[i]}")
 
             # Cerrar el diálogo
             close_btn = wait.until(EC.element_to_be_clickable((
@@ -156,8 +165,7 @@ def check_date(driver, wait, authorization_number):
             break
         except Exception as e:
             print(f"❌ Error en tecnología #{i}: {e}")
-            break  # Si hay un error inesperado, también puedes cortar el ciclo si lo prefieres
-
+            break
     
     
 
